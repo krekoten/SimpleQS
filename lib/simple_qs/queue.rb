@@ -14,7 +14,7 @@ module SimpleQS
 			begin
 				self.class.check_queue_name(queue_url_or_name)
 				@name = queue_url_or_name
-				@queue_url = "http://#{SimpleQS::Request::Base::HOST}/#{SimpleQS.account_id}/#{@name}"
+				@queue_url = "http://#{SimpleQS.host}/#{SimpleQS.account_id}/#{@name}"
 			rescue ArgumentError
 				@queue_url = queue_url_or_name
 			end

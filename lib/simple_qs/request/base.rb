@@ -8,15 +8,14 @@ module SimpleQS
     class Base
       
       RESERVED_CHARACTERS = /[^a-zA-Z0-9\-\.\_\~]/
-      HOST                = 'queue.amazonaws.com'
       SIGNATURE_VERSION   = 2
       SIGNATURE_METHOD    = 'HmacSHA1'
       
-      def initialize params = {}
+      def initialize(params = {})
         self.query_params = params
       end
       
-      def == other
+      def ==(other)
         self.class.http_method == other.class.http_method\
           && query_params == other.query_params\
           && query_string == other.query_string
@@ -26,7 +25,7 @@ module SimpleQS
         @timestamp ||= _timestamp
       end
       
-      def timestamp= time
+      def timestamp=(time)
         raise ArgumentError, "expected Time object, bug got #{time.class.to_s} instead." unless time.kind_of?(Time)
         @timestamp = time.utc.strftime("%Y-%m-%dT%H:%M:%SZ")
       end
@@ -58,11 +57,6 @@ module SimpleQS
         value = value.join('/') if value.kind_of?(Array)
         @query_string = (value =~ /^\// ? value : "/#{value}")
       end
-      
-      def host
-        @host ||= HOST
-      end
-      attr_writer :host
 
       # Canonicalizes query string
       def canonical_query_string
@@ -72,14 +66,14 @@ module SimpleQS
       def signature_base_string
         [
           self.class.http_method.to_s.upcase,
-          host.downcase,
+          SimpleQS.host.downcase,
           query_string,
           canonical_query_string
         ].join("\n")
       end
 
 			def uri with_query_params = false
-				"http://#{host}#{query_string}" << (with_query_params ? "?#{params_to_query(query_params)}" : '')
+				"http://#{SimpleQS.host}#{query_string}" << (with_query_params ? "?#{params_to_query(query_params)}" : '')
 			end
       
       def sign!

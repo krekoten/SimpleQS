@@ -14,4 +14,18 @@ describe SimpleQS do
     SimpleQS.account_id = ENV['AWS_ACCOUNT_ID']
     SimpleQS.account_id.should == ENV['AWS_ACCOUNT_ID'].gsub(/[^0-9]/, '')
   end
+  
+  it 'should have default host' do
+    SimpleQS.host.should == 'queue.amazonaws.com'
+  end
+  
+  it 'should return valis us-west-1 host' do
+    SimpleQS.host = :us_west_1
+    SimpleQS.host.should == 'us-west-1.queue.amazonaws.com'
+  end
+  
+  it 'should return valis eu-west-1 host' do
+    SimpleQS.host = :eu_west_1
+    SimpleQS.host.should == 'eu-west-1.queue.amazonaws.com'
+  end
 end
