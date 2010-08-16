@@ -45,7 +45,7 @@ Or:
 Receive message(s):
 		queue.receive_messages # always returns array of messages
 		queue.receive_messages(:All, 10, 70) # receive maximum 10 messages with all attributes (:All)
-																				 # and set for them visibility timeout to 70 seconds
+											 # and set for them visibility timeout to 70 seconds
 Or:
 		SimpleQS::Message.receive(queue)
 		SimpleQS::Message.receive(queue, :All, 10, 70)
@@ -53,7 +53,7 @@ Resend received message:
 		messages = queue.receive_messages
 		messages.first.resend
 Change visibility timeout for this message:
-		messages.first.check_visibility_timeout(120) # Change to 120 seconds
+		messages.first.change_visibility(120) # Change to 120 seconds
 Delete received message:
 		messages.first.delete
 ## TODO ##
@@ -109,7 +109,7 @@ Marjan Krekoten' (krekoten@gmail.com)
 Отримати повідомлення:
 		queue.receive_messages # завжди повертає масив
 		queue.receive_messages(:All, 10, 70) # отримати максимум 10 повідомлень зі всіма атрибутами (:All)
-																				 # та встановленим часом невидимості у 70 секунд
+											 # та встановленим часом невидимості у 70 секунд
 Або:
 		SimpleQS::Message.receive(queue)
 		SimpleQS::Message.receive(queue, :All, 10, 70)
@@ -117,7 +117,7 @@ Marjan Krekoten' (krekoten@gmail.com)
 		messages = queue.receive_messages
 		messages.first.resend
 Змінити час невидимості для даного повідомлення:
-		messages.first.check_visibility_timeout(120) # Встановити у 120 секунд
+		messages.first.change_visibility(120) # Встановити у 120 секунд
 Видалити отримане повідомлення з черги:
 		messages.first.delete
 ## Що потрібно зробити ##
