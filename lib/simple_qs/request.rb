@@ -12,7 +12,7 @@ module SimpleQS
     }
     
     class << self
-      def build request, params = {}
+      def build(request, params = {})
         if SimpleQS::Request::HTTP_METHODS.keys.include?(request)
           SimpleQS::Request.const_get(HTTP_METHODS[request]).new(params)
         else

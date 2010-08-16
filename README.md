@@ -15,9 +15,9 @@
 
 You can select region for queue:
 
-		# :default    => 'queue.amazonaws.com'
-		# :us_west_1  => 'us-west-1.queue.amazonaws.com'
-		# :eu_west_1  => 'eu-west-1.queue.amazonaws.com'
+		# :default		=> 'queue.amazonaws.com'
+		# :us_west_1	=> 'us-west-1.queue.amazonaws.com'
+		# :eu_west_1	=> 'eu-west-1.queue.amazonaws.com'
 		SimpleQS.host # => 'queue.amazonaws.com'
 		
 		SimpleQS.host = :eu_west_1
@@ -141,9 +141,9 @@ Marjan Krekoten' (krekoten@gmail.com)
 
 Можна обрати регіон, в якому буде створена черга:
 
-		# :default    => 'queue.amazonaws.com'
-		# :us_west_1  => 'us-west-1.queue.amazonaws.com'
-		# :eu_west_1  => 'eu-west-1.queue.amazonaws.com'
+		# :default		=> 'queue.amazonaws.com'
+		# :us_west_1	=> 'us-west-1.queue.amazonaws.com'
+		# :eu_west_1	=> 'eu-west-1.queue.amazonaws.com'
 		SimpleQS.host # => 'queue.amazonaws.com'
 
 		SimpleQS.host = :eu_west_1

@@ -4,7 +4,7 @@ module SimpleQS
       http_method :get
       
       def perform
-				sign!
+        sign!
         SimpleQS::Responce.new Net::HTTP.get(URI.parse(uri(true)))
       end
     end

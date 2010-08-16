@@ -39,13 +39,13 @@ module SimpleQS
           'Timestamp'           => timestamp,
           'AWSAccessKeyId'      => SimpleQS.access_key_id
         }.merge(@query_params)
-        @query_params.delete 'Timestamp' if @query_params['Expires']
+        @query_params.delete('Timestamp') if @query_params['Expires']
         
         @query_params
       end
       attr_writer :query_params
       
-      def update_query_params params
+      def update_query_params(params)
         @query_params = query_params.merge params
       end
 
@@ -53,14 +53,14 @@ module SimpleQS
         @query_string ||= "/"
       end
       
-      def query_string= value
+      def query_string=(value)
         value = value.join('/') if value.kind_of?(Array)
         @query_string = (value =~ /^\// ? value : "/#{value}")
       end
 
       # Canonicalizes query string
       def canonical_query_string
-        params_to_query query_params.sort
+        params_to_query(query_params.sort)
       end
 
       def signature_base_string
@@ -72,9 +72,9 @@ module SimpleQS
         ].join("\n")
       end
 
-			def uri with_query_params = false
-				"http://#{SimpleQS.host}#{query_string}" << (with_query_params ? "?#{params_to_query(query_params)}" : '')
-			end
+      def uri(with_query_params = false)
+        "http://#{SimpleQS.host}#{query_string}" << (with_query_params ? "?#{params_to_query(query_params)}" : '')
+      end
       
       def sign!
         update_query_params({
@@ -83,12 +83,12 @@ module SimpleQS
         self
       end
 
-			def params_to_query params
-				params.map {|pair| pair.map {|value| URI.escape(value.to_s, RESERVED_CHARACTERS)}.join('=')}.join('&')
-			end
+      def params_to_query(params)
+        params.map {|pair| pair.map {|value| URI.escape(value.to_s, RESERVED_CHARACTERS)}.join('=')}.join('&')
+      end
       
       class << self
-        def http_method value = nil
+        def http_method(value = nil)
           @http_method = value if value
           @http_method
         end

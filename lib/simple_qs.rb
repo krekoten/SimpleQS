@@ -12,7 +12,7 @@ module SimpleQS
     :eu_west_1  => 'eu-west-1.queue.amazonaws.com'
   }
 
-	autoload :Message,		'simple_qs/message'
+  autoload :Message,    'simple_qs/message'
   autoload :Queue,      'simple_qs/queue'
   autoload :Request,    'simple_qs/request'
   autoload :Responce,   'simple_qs/responce'
