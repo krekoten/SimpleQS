@@ -19,11 +19,3 @@ spec = eval(File.read('simple_qs.gemspec'))
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
-
-desc "Release gem to gemcutter."
-task :release do
-  require 'rake/gemcutter'
-  Rake::Gemcutter::Tasks.new(spec).define
-  Rake::Task['gem:push'].invoke
-end
-
