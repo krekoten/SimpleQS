@@ -5,6 +5,4 @@ gem 'xml-simple'
 
 group :test do
   gem 'rspec'
-  gem 'rr'
-  gem 'rcov'
 end
