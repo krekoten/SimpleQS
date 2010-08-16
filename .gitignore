@@ -1,3 +1,5 @@
 coverage
 .bundle
 *.swp
+pkg/
+doc/

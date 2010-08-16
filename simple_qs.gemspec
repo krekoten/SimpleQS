@@ -1,4 +1,4 @@
-include File.expand_path(File.join(File.dirname(__FILE__), 'lib', 'version'))
+require File.expand_path(File.join(File.dirname(__FILE__), 'lib', 'version'))
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
