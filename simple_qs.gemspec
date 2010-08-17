@@ -16,4 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('xml-simple', '>= 1.0.12')
   s.add_dependency('ruby-hmac', '>= 0.3.2')
+  
+  s.require_path = 'lib'
+  s.files        = Dir.glob("lib/**/*") + %w(LICENSE README.md CHANGELOG.md TODO.md)
 end
