@@ -2,6 +2,8 @@ module SimpleQS
   class Queue
     
     class MaxVisibilityError < StandardError; end
+    class MaxMessageSizeError < StandardError; end
+    class MessageRetentionPeriodError < StandardError; end
 
     MAX_VISIBILITY_TIMEOUT = 43200
 
@@ -103,10 +105,33 @@ module SimpleQS
     def set_policy(policy)
       set_attributes({:Policy => policy})
     end
+    
+    def set_maximum_message_size(message_size)
+      set_attributes({:MaximumMessageSize => message_size})
+    end
+    
+    def set_message_retention_period(period)
+      set_attributes({:MessageRetentionPeriod => period})
+    end
+
+    ALLOWED_ATTRIBUTES = [
+      :VisibilityTimeout,
+      :Policy,
+      :MaximumMessageSize,
+      :MessageRetentionPeriod
+    ]
 
     def set_attributes(attributes)
-      raise ArgumentError, "Allowed attributes: :VisibilityTimeout, :Policy" unless (attributes.keys - [:VisibilityTimeout, :Policy]).empty?
+      unless (attributes.keys - ALLOWED_ATTRIBUTES).empty?
+        raise ArgumentError, "Allowed attributes: #{ALLOWED_ATTRIBUTES.map {|attr| ":" << attr.to_s}.join(", ")}"
+      end
       self.class.check_visibility_timeout(attributes[:VisibilityTimeout]) if attributes[:VisibilityTimeout]
+      if attributes[:MaximumMessageSize] && !(1024..65536).include?(attributes[:MaximumMessageSize])
+        raise MaxMessageSizeError, 'MaximumMessageSize should be between 1024 and 65536'
+      end
+      if attributes[:MessageRetentionPeriod] && !(3600..1209600).include?(attributes[:MessageRetentionPeriod])
+        raise MessageRetentionPeriodError, 'MessageRetentionPeriod should be between 3600 and 1209600'
+      end
 
       params = {
         'Action'      => 'SetQueueAttributes'

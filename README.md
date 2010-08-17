@@ -15,13 +15,14 @@
 
 You can select region for queue:
 
-		# :default		=> 'queue.amazonaws.com'
-		# :us_west_1	=> 'us-west-1.queue.amazonaws.com'
-		# :eu_west_1	=> 'eu-west-1.queue.amazonaws.com'
-		SimpleQS.host # => 'queue.amazonaws.com'
+		# :us_east_1      => 'sqs.us-east-1.amazonaws.com',
+		# :us_west_1      => 'sqs.us-west-1.amazonaws.com',
+		# :eu_west_1      => 'sqs.eu-west-1.amazonaws.com',
+		# :ap_southeast_1 => 'sqs.ap-southeast-1.amazonaws.com'
+		SimpleQS.host # => 'sqs.us-east-1.amazonaws.com'
 		
 		SimpleQS.host = :eu_west_1
-		SimpleQS.host # => 'eu-west-1.queue.amazonaws.com'
+		SimpleQS.host # => 'sqs.eu-west-1.amazonaws.com'
 
 ### Queues ###
 
@@ -47,9 +48,21 @@ List all account's queues starting with 'test':
 
 		SimpleQS::Queue.list('test')
 
+Check if queue exists:
+
+		SimpleQS::Queue.exists?('queue_name')
+
 Change default visibility timeout for queue:
 
 		SimpleQS::Queue.new('queue_name').set_visibility_timeout(120)
+
+Change maximum message size for queue:
+
+		SimpleQS::Queue.new('queue_name').set_maximum_message_size(65536)
+
+Change message retention period:
+
+		SimpleQS::Queue.new('queue_name').set_message_retention_period(1209600)
 
 Set queue attributes:
 
@@ -73,6 +86,10 @@ Remove permissions:
 Delete queue:
 
 		SimpleQS::Queue.new('queue_name').delete
+
+Or:
+
+		SimpleQS::Queue.delete('queue_name')
 
 ### Messages ###
 
@@ -141,13 +158,14 @@ Marjan Krekoten' (krekoten@gmail.com)
 
 Можна обрати регіон, в якому буде створена черга:
 
-		# :default		=> 'queue.amazonaws.com'
-		# :us_west_1	=> 'us-west-1.queue.amazonaws.com'
-		# :eu_west_1	=> 'eu-west-1.queue.amazonaws.com'
-		SimpleQS.host # => 'queue.amazonaws.com'
+		# :us_east_1      => 'sqs.us-east-1.amazonaws.com',
+		# :us_west_1      => 'sqs.us-west-1.amazonaws.com',
+		# :eu_west_1      => 'sqs.eu-west-1.amazonaws.com',
+		# :ap_southeast_1 => 'sqs.ap-southeast-1.amazonaws.com'
+		SimpleQS.host # => 'sqs.us-east-1.amazonaws.com'
 
 		SimpleQS.host = :eu_west_1
-		SimpleQS.host # => 'eu-west-1.queue.amazonaws.com'
+		SimpleQS.host # => 'sqs.eu-west-1.amazonaws.com'
 
 ### Черги ###
 
@@ -173,9 +191,21 @@ Marjan Krekoten' (krekoten@gmail.com)
 
 		SimpleQS::Queue.list('test')
 
+Перевірити чи черга існує:
+
+		SimpleQS::Queue.exists?('queue_name')
+
 Змінити типовий час невидимості для даної черги:
 
 		SimpleQS::Queue.new('queue_name').set_visibility_timeout(120)
+
+Змінити максимальний розмір повідомлення:
+
+		SimpleQS::Queue.new('queue_name').set_maximum_message_size(65536)
+
+Змінити період зберігання повідомлень для черги:
+
+		SimpleQS::Queue.new('queue_name').set_message_retention_period(1209600)
 
 Встановити атрибути черги:
 
@@ -199,6 +229,10 @@ Marjan Krekoten' (krekoten@gmail.com)
 Видалити чергу:
 
 		SimpleQS::Queue.new('queue_name').delete
+
+Або:
+
+		SimpleQS::Queue.delete('queue_name')
 
 ### Повідомлення ###
 

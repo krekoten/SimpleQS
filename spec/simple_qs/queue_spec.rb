@@ -72,6 +72,38 @@ module SimpleQS
         SimpleQS::Queue.new('testQueue').set_visibility_timeout(60)
       end.should_not raise_error
     end
+    
+    it 'should be able to change maximum message size' do
+      lambda do
+        SimpleQS::Queue.new('testQueue').set_maximum_message_size(65536)
+      end.should_not raise_error
+    end
+    
+    it 'should raise error if message size is wrong' do
+      lambda do
+        SimpleQS::Queue.new('testQueue').set_maximum_message_size(65537)
+      end.should raise_error(SimpleQS::Queue::MaxMessageSizeError)
+      
+      lambda do
+        SimpleQS::Queue.new('testQueue').set_maximum_message_size(1023)
+      end.should raise_error(SimpleQS::Queue::MaxMessageSizeError)
+    end
+    
+    it 'should be able to change message retention period' do
+      lambda do
+        SimpleQS::Queue.new('testQueue').set_message_retention_period(1209600)
+      end.should_not raise_error
+    end
+    
+    it 'should raise error if message retention period is wrong' do
+      lambda do
+        SimpleQS::Queue.new('testQueue').set_message_retention_period(3599)
+      end.should raise_error(SimpleQS::Queue::MessageRetentionPeriodError)
+      
+      lambda do
+        SimpleQS::Queue.new('testQueue').set_message_retention_period(1209601)
+      end.should raise_error(SimpleQS::Queue::MessageRetentionPeriodError)
+    end
 
     it 'should be able to set default visibility timeout for queue using set_attributes' do
       lambda do
