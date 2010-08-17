@@ -16,16 +16,21 @@ describe SimpleQS do
   end
   
   it 'should have default host' do
-    SimpleQS.host.should == 'queue.amazonaws.com'
+    SimpleQS.host.should == 'sqs.us-east-1.amazonaws.com'
   end
   
-  it 'should return valis us-west-1 host' do
+  it 'should return valid us-west-1 host' do
     SimpleQS.host = :us_west_1
-    SimpleQS.host.should == 'us-west-1.queue.amazonaws.com'
+    SimpleQS.host.should == 'sqs.us-west-1.amazonaws.com'
   end
   
-  it 'should return valis eu-west-1 host' do
+  it 'should return valid eu-west-1 host' do
     SimpleQS.host = :eu_west_1
-    SimpleQS.host.should == 'eu-west-1.queue.amazonaws.com'
+    SimpleQS.host.should == 'sqs.eu-west-1.amazonaws.com'
+  end
+  
+  it 'should return valid ap-southeast-1 host' do
+    SimpleQS.host = :ap_southeast_1
+    SimpleQS.host.should == 'sqs.ap-southeast-1.amazonaws.com'
   end
 end

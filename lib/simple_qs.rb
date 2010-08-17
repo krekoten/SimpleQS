@@ -7,9 +7,10 @@ module SimpleQS
   API_VERSION = '2009-02-01'
   
   SQS_HOSTS = {
-    :default    => 'queue.amazonaws.com',
-    :us_west_1  => 'us-west-1.queue.amazonaws.com',
-    :eu_west_1  => 'eu-west-1.queue.amazonaws.com'
+    :us_east_1      => 'sqs.us-east-1.amazonaws.com',
+    :us_west_1      => 'sqs.us-west-1.amazonaws.com',
+    :eu_west_1      => 'sqs.eu-west-1.amazonaws.com',
+    :ap_southeast_1 => 'sqs.ap-southeast-1.amazonaws.com'
   }
 
   autoload :Message,    'simple_qs/message'
@@ -26,12 +27,12 @@ module SimpleQS
     attr_reader :account_id
     
     def host=(value)
-      raise ArgumentError, 'Expected value to be one of: :default, :us_west_1, :eu_west_1' unless SQS_HOSTS.key?(value)
+      raise ArgumentError, 'Expected value to be one of: :us_east_1, :us_west_1, :eu_west_1, :ap_southeast_1' unless SQS_HOSTS.key?(value)
       @host = value
     end
     
     def host
-      @host ||= :default
+      @host ||= :us_east_1
       SQS_HOSTS[@host]
     end
   end

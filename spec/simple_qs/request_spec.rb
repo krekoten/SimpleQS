@@ -35,16 +35,16 @@ module SimpleQS
     
     it 'should generate correct base string' do
       @get_request.query_string = '/770098461991/queue2'
-      @get_request.signature_base_string.should == "GET\nqueue.amazonaws.com\n/770098461991/queue2\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
+      @get_request.signature_base_string.should == "GET\n#{SimpleQS.host}\n/770098461991/queue2\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
       
       @get_request.query_string = '770098461991/queue2'
-      @get_request.signature_base_string.should == "GET\nqueue.amazonaws.com\n/770098461991/queue2\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
+      @get_request.signature_base_string.should == "GET\n#{SimpleQS.host}\n/770098461991/queue2\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
       
       @get_request.query_string = ['770098461991', 'queue2']
-      @get_request.signature_base_string.should == "GET\nqueue.amazonaws.com\n/770098461991/queue2\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
+      @get_request.signature_base_string.should == "GET\n#{SimpleQS.host}\n/770098461991/queue2\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
       
       @get_request.query_string = nil
-      @get_request.signature_base_string.should == "GET\nqueue.amazonaws.com\n/\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
+      @get_request.signature_base_string.should == "GET\n#{SimpleQS.host}\n/\nAWSAccessKeyId=#{SimpleQS.access_key_id}&Action=SetQueueAttributes&Attribute.Name=VisibilityTimeout&Attribute.Value=90&Expires=2008-02-10T12%3A00%3A00Z&SignatureMethod=HmacSHA1&SignatureVersion=2&Version=2009-02-01"
     end
     
     it '#sign! should generate signature from base string' do
