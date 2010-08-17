@@ -233,6 +233,15 @@ module SimpleQS
         end
       end
       
+      def exists?(queue_name)
+        list(queue_name).any? {|queue| queue.name == queue_name}
+      end
+      
+      def delete(queue_name)
+        new(queue_name).delete
+      end
+      alias_method :destroy, :delete
+      
       # Performs checks on queue name. Raises ArgumentError with message in case of
       # constraint violation
       def check_queue_name(name)
