@@ -2,7 +2,7 @@
 
 Bugfixes:
 
-  - Add missing InvalidClientTokenId error
+  - Add missing InvalidClientTokenId error [#1]
 
 ## 0.2
 
