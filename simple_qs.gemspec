@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.name        = 'simple_qs'
   s.version     = SimpleQS::VERSION
   s.summary     = 'Amazon SQS service library'
-  s.description = 'SimpleQS library fully wraps Amazon SQS REST API. It allows you perform all kind of calls on queues and messages.'
+  s.description = 'SimpleQS is Ruby wrapper for Amazon Simple Queue Service (SQS) REST API. It allows you perform all kind of calls on queues and messages.'
 
   s.required_ruby_version     = '>= 1.8.7'
   s.required_rubygems_version = ">= 1.3.6"
